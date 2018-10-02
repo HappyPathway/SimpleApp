@@ -67,7 +67,13 @@
         {
             "type": "file",
             "source": "{{user `working_dir`}}/calculator.py",
-            "destination": "/opt/app/calculator.py"
+            "destination": "/tmp/calculator.py"
+        },
+        {
+            "type": "shell",
+            "inline": [
+              "sudo mv /tmp/calculator.py /opt/app/calculator.py"
+            ]
         },
         {
             "type": "file",
