@@ -38,7 +38,7 @@
       },
       {
           "type": "file",
-          "source": "{{user `chef_encrypted_data_bag_secret`}}",
+          "source": "{{user `working_dir`}}/encrypted_data_bag_secret",
           "destination": "/tmp/packer-chef-client/encrypted_data_bag_secret"
       },
       {
