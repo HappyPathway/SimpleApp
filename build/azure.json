@@ -9,8 +9,8 @@
         "chef_recipe": "",
         "location": "westus",
         "chef_validation_key": "{{env `CHEF_VALIDATION_KEY` }}",
-        "chef_client_name": "{{env `CHEF_VALIDATION_CLIENT_NAME` }}",
-        "chef_server_url": "{{env `CHEF_SERVER_URL`}}",
+        "chef_client_name": "{{ vault `/secret/credentials/chef` `validation_client_name`}}",
+        "chef_server_url": "{{ vault `/secret/credentials/chef` `server_url`}}",
         "chef_encrypted_databag_secret": "{{env `CHEF_ENCRYPTED_DATABAG_SECRET`}}",
         "working_dir": "{{env `PWD`}}",
         "home_dir": "{{env `HOME`}}"
