@@ -53,7 +53,33 @@
           "json": {
             "encrypted_data_bag_secret_path": "/tmp/packer-chef-client/encrypted_data_bag_secret"
           }
-      }
+       },
+       {
+           "type": "file",
+           "source": "{{user `working_dir`}}/calculator.py",
+           "destination": "/opt/app/calculator.py"
+       },
+       {
+           "type": "file",
+           "source": "{{user `working_dir`}}/conf/calculator.conf",
+           "destination": "/etc/supervisor/conf.d/calculator.conf"
+       },
+       {
+           "type": "file",
+           "source": "{{user `working_dir`}}/conf/requirements.txt",
+           "destination": "/tmp/requirements.txt"
+       },
+       {
+          "type": "shell",
+          "inline": [
+            "sudo pip install -r /tmp/requirements.txt"
+          ]
+       }
+       
+            
+           
+            
+        
     ],
     "post-processors": [
     [
