@@ -59,11 +59,6 @@
        },
        {
            "type": "file",
-           "source": "{{user `working_dir`}}/conf/calculator.conf",
-           "destination": "/etc/supervisor/conf.d/calculator.conf"
-       },
-       {
-           "type": "file",
            "source": "{{user `working_dir`}}/conf/requirements.txt",
            "destination": "/tmp/requirements.txt"
        },
