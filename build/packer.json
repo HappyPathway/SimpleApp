@@ -3,7 +3,7 @@
       "chef_validation_key": "{{ vault `/secret/credentials/chef` `validation_key`}}",
       "chef_client_name": "{{ vault `/secret/credentials/chef` `validation_client_name`}}",
       "chef_server_url": "{{ vault `/secret/credentials/chef` `server_url`}}",
-      "chef_env": "",
+      "chef_env": "_default",
       "docker_cmd": "",
       "docker_repo": "{{ vault `/secret/credentials/docker` `repo`}}",
       "login_server": "{{ vault `/secret/credentials/docker` `host`}}",
