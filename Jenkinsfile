@@ -41,7 +41,7 @@ vault read -field=validation_key secret/credentials/chef > ${PWD}/chef_validatio
 aws_credentials=$(vault read -format=json aws/creds/ec2_admin)
 export AWS_ACCESS_KEY_ID=$(echo ${aws_credentials}|jq .data.access_key | awk -F\\" \'{ print $2 }\')
 export AWS_SECRET_ACCESS_KEY=$(echo ${aws_credentials}|jq .data.secret_key | awk -F\\" \'{ print $2 }\')
-
+export AWS_DEFAULT_REGION=us-east-1
 packer build -force -var-file=${PWD}/build.json build/aws.json
 
 '''
