@@ -26,7 +26,7 @@ export ARM_SUBSCRIPTION_ID=$(vault read -field subscription_id secret/credential
 export ARM_TENANT_ID=$(vault read -field tenant_id secret/credentials/azure)
 
 
-packer build -var-file=${PWD}/build.json build/azure.json
+packer build -force -var-file=${PWD}/build.json build/azure.json
 
 '''
           }
@@ -42,7 +42,7 @@ aws_credentials=$(vault read -format=json aws/creds/ec2_admin)
 export AWS_ACCESS_KEY_ID=$(echo ${aws_credentials}|jq .data.access_key | awk -F\\" \'{ print $2 }\')
 export AWS_SECRET_ACCESS_KEY=$(echo ${aws_credentials}|jq .data.secret_key | awk -F\\" \'{ print $2 }\')
 
-packer build -var-file=${PWD}/build.json build/aws.json
+packer build -force -var-file=${PWD}/build.json build/aws.json
 
 '''
           }
