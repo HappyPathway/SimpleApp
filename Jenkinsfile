@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Docker Builder') {
+    stage('Packer') {
       parallel {
         stage('Docker Builder') {
           steps {
