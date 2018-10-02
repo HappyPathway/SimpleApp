@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Packer Build') {
       steps {
-        sh '''source ~/vault.sh
+        sh '''#!/bin/bash
+source ~/vault.sh
 packer build build/packer.json'''
       }
     }
