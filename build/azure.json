@@ -1,0 +1,84 @@
+{
+    "variables": {
+        "client_id": "{{env `ARM_CLIENT_ID`}}",
+        "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+        "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
+        "tenant_id": "{{env `ARM_TENANT_ID`}}",
+        "service_name": "",
+        "service_version": "",
+        "chef_recipe": "",
+        "location": "westus",
+        "chef_validation_key": "{{env `CHEF_VALIDATION_KEY` }}",
+        "chef_client_name": "{{env `CHEF_VALIDATION_CLIENT_NAME` }}",
+        "chef_server_url": "{{env `CHEF_SERVER_URL`}}",
+        "chef_encrypted_databag_secret": "{{env `CHEF_ENCRYPTED_DATABAG_SECRET`}}",
+        "working_dir": "{{env `PWD`}}",
+        "home_dir": "{{env `HOME`}}"
+    },
+    "builders": [
+        {
+            "type": "azure-arm",
+            "subscription_id": "{{user `subscription_id`}}",
+            "client_id": "{{user `client_id`}}",
+            "client_secret": "{{user `client_secret`}}",
+            "tenant_id": "{{user `tenant_id`}}",
+            "location": "{{user `location`}}",
+
+            "os_type": "Linux",
+            "image_publisher": "Canonical",
+            "image_offer": "UbuntuServer",
+            "image_sku": "14.04.4-LTS",
+
+            "managed_image_resource_group_name": "PackerConfigs",
+            "managed_image_name": "{{user `service_name`}}-{{user `service_version`}}",
+
+            "azure_tags": {
+                "service": "{{user `service_name` }}",
+                "version": "{{user `service_version` }}"
+            },
+            "vm_size": "Standard_A2"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+              "apt-get update && apt-get install -y sudo curl",
+              "mkdir -p /tmp/packer-chef-client"
+            ]
+        },
+        {
+            "type": "file",
+            "source": "{{user `working_dir`}}/encrypted_data_bag_secret",
+            "destination": "/tmp/packer-chef-client/encrypted_data_bag_secret"
+        },
+        {
+            "type": "chef-client",
+            "server_url": "{{user `chef_server_url`}}",
+            "chef_environment": "{{ user `chef_env`}}",
+            "run_list": "recipe[{{ user `service_name` }}]",
+            "ssl_verify_mode": "verify_none",
+            "validation_key_path": "{{user `working_dir`}}/chef_validation_key",
+            "validation_client_name": "{{user `chef_client_name` }}",
+            "json": {
+              "encrypted_data_bag_secret_path": "/tmp/packer-chef-client/encrypted_data_bag_secret"
+            }
+        },
+        {
+            "type": "file",
+            "source": "{{user `working_dir`}}/calculator.py",
+            "destination": "/opt/app/calculator.py"
+        },
+        {
+            "type": "file",
+            "source": "{{user `working_dir`}}/conf/requirements.txt",
+            "destination": "/tmp/requirements.txt"
+        },
+        {
+            "type": "shell",
+            "inline": [
+              "sudo pip install -r /tmp/requirements.txt"
+            ]
+        }
+    ]
+}
