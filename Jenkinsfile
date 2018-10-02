@@ -11,5 +11,16 @@ packer build -var-file=${PWD}/build.json build/packer.json
 rm ${PWD}/encrypted_data_bag_secret'''
       }
     }
+    stage('Github Release') {
+      steps {
+        sh '''echo "Exporting token and enterprise api to enable github-release tool"
+export GITHUB_TOKEN=$(vault read -field=token secret/credentials/github)
+export GITHUB_ORGANIZATION=$(vault read -field=organization secret/credentials/github)
+
+release_version=$(cat ${PWD}/build.json | jq -r .service_version)
+
+'''
+      }
+    }
   }
 }
