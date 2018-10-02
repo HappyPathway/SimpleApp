@@ -6,7 +6,7 @@
       "chef_encrypted_data_bag_secret": "{{ vault `/secret/credentials/chef` `encrypted_data_bag_secret`}}",
       "chef_env": "",
       "docker_cmd": "",
-      "docker_repo": "{{ vault `/secret/credentials/docker` `repo`}}"
+      "docker_repo": "{{ vault `/secret/credentials/docker` `repo`}}",
       "login_server": "{{ vault `/secret/credentials/docker` `host`}}",
       "login_username": "{{ vault `/secret/credentials/docker` `user`}}",
       "login_password": "{{ vault `/secret/credentials/docker` `password`}}",
