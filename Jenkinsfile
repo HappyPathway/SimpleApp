@@ -10,7 +10,7 @@ source ~/vault.sh
 vault read -field=encrypted_data_bag_secret secret/credentials/chef > ${PWD}/encrypted_data_bag_secret 
 vault read -field=validation_key secret/credentials/chef > ${PWD}/chef_validation_key
 packer build -var-file=${PWD}/build.json build/docker.json
-rm ${PWD}/encrypted_data_bag_secret'''
+'''
           }
         }
         stage('Azure Builder') {
@@ -28,7 +28,7 @@ export ARM_TENANT_ID=$(vault read -field tenant_id secret/credentials/azure)
 
 packer build -var-file=${PWD}/build.json build/azure.json
 
-rm ${PWD}/encrypted_data_bag_secret'''
+'''
           }
         }
       }
