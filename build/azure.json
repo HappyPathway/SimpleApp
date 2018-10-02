@@ -8,7 +8,6 @@
         "service_version": "",
         "chef_recipe": "",
         "location": "westus",
-        "chef_validation_key": "{{env `CHEF_VALIDATION_KEY` }}",
         "chef_client_name": "{{ vault `/secret/credentials/chef` `validation_client_name`}}",
         "chef_server_url": "{{ vault `/secret/credentials/chef` `server_url`}}",
         "chef_encrypted_databag_secret": "{{env `CHEF_ENCRYPTED_DATABAG_SECRET`}}",
@@ -85,6 +84,14 @@
             "inline": [
               "sudo pip install -r /tmp/requirements.txt"
             ]
+        },
+        {
+            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+            "inline": [
+                "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+            ],
+            "inline_shebang": "/bin/sh -x",
+            "type": "shell"
         }
     ]
 }

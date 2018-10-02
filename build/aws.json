@@ -2,9 +2,8 @@
     "variables": {
       "source_ami": "",
       "instance_type": "m4.large",
-      "chef_validation_key": "{{env `CHEF_VALIDATION_KEY` }}",
-      "chef_client_name": "{{env `CHEF_VALIDATION_CLIENT_NAME` }}",
-      "chef_server_url": "{{env `CHEF_SERVER_URL`}}",
+      "chef_client_name": "{{ vault `/secret/credentials/chef` `validation_client_name`}}",
+      "chef_server_url": "{{ vault `/secret/credentials/chef` `server_url`}}",
       "working_dir": "{{env `PWD`}}",
       "home_dir": "{{env `HOME`}}",
       "service_name": "",
@@ -59,7 +58,13 @@
         {
             "type": "file",
             "source": "{{user `working_dir`}}/calculator.py",
-            "destination": "/opt/app/calculator.py"
+            "destination": "/tmp/calculator.py"
+        },
+        {
+            "type": "shell",
+            "inline": [
+              "sudo mv /tmp/calculator.py /opt/app/calculator.py"
+            ]
         },
         {
             "type": "file",
