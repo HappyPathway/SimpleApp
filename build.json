@@ -1,5 +1,5 @@
 {
   "service_name": "simple-app",
-  "service_version": "1.0.0",
+  "service_version": "3.0.0",
   "docker_cmd": "/usr/bin/env python /opt/app/calculator.py --host=0.0.0.0 --port=8000"
 }
