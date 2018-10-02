@@ -1,6 +1,5 @@
 {
     "variables": {
-      "chef_validation_key": "{{ vault `/secret/credentials/chef` `validation_key`}}",
       "chef_client_name": "{{ vault `/secret/credentials/chef` `validation_client_name`}}",
       "chef_server_url": "{{ vault `/secret/credentials/chef` `server_url`}}",
       "chef_env": "_default",
@@ -47,7 +46,7 @@
           "chef_environment": "{{ user `chef_env`}}",
           "run_list": "recipe[{{ user `service_name` }}]",
           "ssl_verify_mode": "verify_none",
-          "validation_key_path": "{{user `chef_validation_key` }}",
+          "validation_key_path": "{{user `working_dir`}}/chef_validation_key",
           "validation_client_name": "{{user `chef_client_name` }}",
           "json": {
             "encrypted_data_bag_secret_path": "/tmp/packer-chef-client/encrypted_data_bag_secret"
