@@ -60,7 +60,8 @@
             "validation_key_path": "{{user `working_dir`}}/chef_validation_key",
             "validation_client_name": "{{user `chef_client_name` }}",
             "json": {
-              "encrypted_data_bag_secret_path": "/tmp/packer-chef-client/encrypted_data_bag_secret"
+              "encrypted_data_bag_secret_path": "/tmp/packer-chef-client/encrypted_data_bag_secret",
+              "docker_install": false
             }
         },
         {
