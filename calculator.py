@@ -22,6 +22,13 @@ class Multiply(Resource):
     def get(self, operand1, operand2):
         return {'product': int(operand1*operand2)}
 
+class SquareRootTimes42(Resource):
+    def post(self, operand1):
+        return {'sqrtX42': int(math.sqrt(operand1)*42)}
+
+    def get(self, operand1):
+        return {'sqrtX42': int(math.sqrt(operand1)*42)}
+
 class SquareRoot(Resource):
 
     def post(self, operand1):
