@@ -11,9 +11,15 @@ class Add(Resource):
     def post(self, operand1, operand2):
         return {'sum': int(operand1+operand2)}
 
+    def get(self, operand1, operand2):
+        return {'sum': int(operand1+operand2)}
+
 class Multiply(Resource):
 
     def post(self, operand1, operand2):
+        return {'product': int(operand1*operand2)}
+
+    def get(self, operand1, operand2):
         return {'product': int(operand1*operand2)}
 
 class SquareRoot(Resource):
@@ -21,16 +27,28 @@ class SquareRoot(Resource):
     def post(self, operand1):
         return {'sqrt': int(math.sqrt(operand1))}
 
+    def get(self, operand1):
+        return {'sqrt': int(math.sqrt(operand1))}
+
 
 class Floor(Resource):
 
     def post(self, operand1):
+        return {'floor': int(math.floor(operand1))}
+    
+    def get(self, operand1):
         return {'floor': int(math.floor(operand1))}
 
 
 class Divide(Resource):
 
     def post(self, operand1, operand2):
+        try:
+            return {'quotient': int(operand1/operand2)}
+        except ZeroDivisionError:
+            return {'quotien': sys.maxint }
+
+    def get(self, operand1, operand2):
         try:
             return {'quotient': int(operand1/operand2)}
         except ZeroDivisionError:
