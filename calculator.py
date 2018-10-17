@@ -22,7 +22,7 @@ class Multiply(Resource):
     def get(self, operand1, operand2):
         return {'product': int(operand1*operand2)}
 
-class SquareRootTimes42(Resource):
+class SquareRootX42(Resource):
     def post(self, operand1):
         return {'sqrtX42': int(math.sqrt(operand1)*42)}
 
@@ -67,6 +67,7 @@ api.add_resource(Multiply, '/multi/<int:operand1>/<int:operand2>')
 api.add_resource(SquareRoot, '/sqrt/<int:operand1>')
 api.add_resource(Floor, '/floor/<float:operand1>')
 api.add_resource(Divide, '/divide/<int:operand1>/<int:operand2>')
+api.add_resource(SquareRootX42, '/sqrtx42/<int:operand1>')
 
 if __name__ == '__main__':
     from optparse import OptionParser
