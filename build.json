@@ -1,5 +1,6 @@
 {
-  "service_name": "simple-app",
+  "service_name": "app",
   "service_version": "5.0.0",
+  "chef_recipe": "simple-app",
   "docker_cmd": "/usr/bin/env python /opt/app/calculator.py --host=0.0.0.0 --port=8000"
 }
